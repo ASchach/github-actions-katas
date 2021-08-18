@@ -40,5 +40,4 @@ jobs:
           path: .
 
       - name: build
-        uses: actions/checkout@v2
         run: ci/build-app.sh
