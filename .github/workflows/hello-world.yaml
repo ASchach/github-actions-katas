@@ -77,8 +77,9 @@ jobs:
           export GIT_COMMIT="GA-$GITHUB_SHA"
           chmod +x ci/build-docker.sh
           ci/build-docker.sh
-          
+
       - name: Push docker
+        run: |
           chmod +x ci/push-docker.sh
           ci/push-docker.sh
     
