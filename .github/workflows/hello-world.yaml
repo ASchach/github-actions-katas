@@ -61,23 +61,12 @@ jobs:
         with:
           name: code
           path: .
-
-      - name: Login to DockerHub
-        uses: docker/login-action@v1
-        with:
-          username: ${{ env.docker_username }}
-          password: ${{ env.docker_password }}
-      
-      - name: Extract metadata (tags, labels) for Docker
-        id: meta
-        uses: docker/metadata-action@98669ae865ea3cffbcbaa878cf57c20bbf1c6c38
-        with:
-          images: my-docker-hub-namespace/my-docker-hub-repository
-
-      - name: Build and push Docker image
-        uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
-        with:
-          context: .
-          push: true
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
+      - name: Build docker
+        run: |
+          export GIT_COMMIT="GA-$GITHUB_SHA"
+          chmod +x ci/build-docker.sh
+          ci/build-docker.sh
+      - name: Push docker
+          chmod +x ci/push-docker.sh
+          ci/push-docker.sh
+    
