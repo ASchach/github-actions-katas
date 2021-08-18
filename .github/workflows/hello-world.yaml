@@ -40,4 +40,4 @@ jobs:
           path: .
 
       - name: build
-        run: chmod +x ci/build-app.sh && ci/build-app.sh
+        run: chmod +x ci/build-app.sh
