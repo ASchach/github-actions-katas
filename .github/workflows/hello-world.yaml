@@ -8,6 +8,7 @@ jobs:
       - name: checkout
         uses: actions/checkout@v2
       - run: ci/build-app.sh
+
       - name: upload Repo
         uses: actions/upload-artifact@v2
         with:
@@ -24,6 +25,7 @@ jobs:
         with:
           name: code
           path: . 
+
       - name: Test
       - run: ci/unit-test-app.sh
      
@@ -37,11 +39,8 @@ jobs:
         with:
           name: code
           path: . 
+
       - name: build
         uses: actions/checkout@v2
-      - run: ci/build-app.sh        
-      - name: upload Repo
-        uses: actions/upload-artifact@v2
-        with:
-          name: code
-          path: .
+      - run: ci/build-app.sh
+      
