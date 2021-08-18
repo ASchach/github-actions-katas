@@ -60,3 +60,9 @@ jobs:
         with:
           name: code
           path: .
+
+      - name: build
+        run: chmod +x ci/build-docker.sh
+      
+      -name: push
+       run: chmod +x ci/push-docker.sh
