@@ -56,16 +56,28 @@ jobs:
     runs-on: ubuntu-latest
     needs: [Build, Test]
     steps:
+
       - name: download
         uses: actions/download-artifact@v2
         with:
           name: code
           path: .
+
+      - name: set up docker buildx
+        uses: docker/setup-buildx-action@v1
+
+      - name: Login to dockerhub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
       - name: Build docker
         run: |
           export GIT_COMMIT="GA-$GITHUB_SHA"
           chmod +x ci/build-docker.sh
           ci/build-docker.sh
+          
       - name: Push docker
           chmod +x ci/push-docker.sh
           ci/push-docker.sh
